@@ -41,7 +41,7 @@ describe("Functors", () => {
 
   describe("Either", () => {
     test("imperative code example", () => {
-      //getPort :: String -> String
+      // getPort :: String -> String
       const getPort = (path) => {
         try {
           const str = fs.readFileSync(path) as any;
@@ -59,14 +59,15 @@ describe("Functors", () => {
       const getPort = (path) =>
         tryCatch(() => fs.readFileSync(path))
           .map((c) => JSON.parse(c))
+          .map((p) => {
+            console.log(p);
+            return p;
+          })
           .fold(
-            (e) => {
-              console.log(e);
-            },
+            (e) => 3000,
             (c) => {
-              console.log(c);
-              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-              expect(c.port).toEqual(9000);
+              expect(c.port).toEqual(8000);
+              return c.port;
             }
           );
 

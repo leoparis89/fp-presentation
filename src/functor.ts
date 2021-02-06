@@ -5,7 +5,7 @@ export const Box = (x) => ({
 
 export const Right = (x) => ({
   map: (f) => Right(f(x)),
-  fold: (f) => (f, g) => g(x),
+  fold: (f, g) => g(x),
 });
 
 export const Left = (x) => ({
