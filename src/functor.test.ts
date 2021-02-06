@@ -59,15 +59,10 @@ describe("Functors", () => {
       const getPort = (path) =>
         tryCatch(() => fs.readFileSync(path))
           .map((c) => JSON.parse(c))
-          .map((p) => {
-            console.log(p);
-            return p;
-          })
           .fold(
             (e) => 3000,
             (c) => {
               expect(c.port).toEqual(8000);
-              return c.port;
             }
           );
 
