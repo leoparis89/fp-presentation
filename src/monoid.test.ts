@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-concat */
 describe("String type", () => {
-  it("is a semigroup because rit has an associative concat method)", () => {
+  it("is a semigroup because it has an associative concat method)", () => {
     const result1 = "foo".concat("bar").concat("baz");
     const result2 = "foo".concat("bar".concat("baz"));
 
