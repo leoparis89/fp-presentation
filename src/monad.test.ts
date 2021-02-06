@@ -1,7 +1,7 @@
 import fs from "fs";
-import { Left, Right, tryCatch } from "./monad";
+import { tryCatch, IO } from "./monad";
 
-test("one map", () => {
+test("one (map)", () => {
   const getPort = (path) =>
     tryCatch(() => fs.readFileSync(path))
       .chain((c) => tryCatch(() => JSON.parse(c)))
@@ -13,4 +13,22 @@ test("one map", () => {
       );
 
   getPort("src/config.json");
+});
+
+test("IO", () => {
+  const nextCharForNumberString = (str) =>
+    IO(() => str)
+      .map((s) => s.trim())
+      .map((s) => Number(s))
+      .map((v) => {
+        console.log("SIDE EFFECT");
+        return v;
+      })
+      .map((i) => i + 1)
+      .map((i) => String.fromCharCode(i))
+      .map((c) => c.toLowerCase());
+
+  nextCharForNumberString(" 64").fold((val) => {
+    expect(val).toEqual("a");
+  });
 });

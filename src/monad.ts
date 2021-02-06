@@ -18,3 +18,8 @@ export const tryCatch = (f) => {
     return Left(e);
   }
 };
+
+export const IO = (f) => ({
+  map: (g) => IO(() => g(f())),
+  fold: (g) => g(f()),
+});
