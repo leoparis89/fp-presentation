@@ -1,4 +1,5 @@
-import { Box } from "./functor";
+import { Box, Right, Left, tryCatch } from "./functor";
+import fs from "fs";
 
 describe("Functors", () => {
   describe("Identity functor", () => {
@@ -35,6 +36,41 @@ describe("Functors", () => {
           .fold((c) => c.toLowerCase());
 
       expect(nextCharForNumberString(" 64")).toEqual("a");
+    });
+  });
+
+  describe("Either", () => {
+    test("imperative code example", () => {
+      //getPort :: String -> String
+      const getPort = (path) => {
+        try {
+          const str = fs.readFileSync(path) as any;
+          const config = JSON.parse(str);
+          return config.port;
+        } catch (e) {
+          return 3000;
+        }
+      };
+      const result = getPort("src/config.json");
+      expect(result).toEqual(8000);
+    });
+
+    test("one map", () => {
+      const getPort = (path) =>
+        tryCatch(() => fs.readFileSync(path))
+          .map((c) => JSON.parse(c))
+          .fold(
+            (e) => {
+              console.log(e);
+            },
+            (c) => {
+              console.log(c);
+              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+              expect(c.port).toEqual(9000);
+            }
+          );
+
+      getPort("src/config.json");
     });
   });
 });
