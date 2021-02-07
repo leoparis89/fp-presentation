@@ -61,12 +61,10 @@ describe("Functors", () => {
           .map((c) => JSON.parse(c))
           .fold(
             (e) => 3000,
-            (c) => {
-              expect(c.port).toEqual(8000);
-            }
+            (c) => c.port
           );
 
-      getPort("src/config.json");
+      expect(getPort("src/config.json")).toEqual(8000);
     });
   });
 });
