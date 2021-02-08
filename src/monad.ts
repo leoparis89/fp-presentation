@@ -62,6 +62,7 @@ export class Task {
   }
 
   map(f) {
+    return this;
     // return Task.of(() => this.f());
   }
 }
