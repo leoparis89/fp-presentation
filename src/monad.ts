@@ -50,15 +50,18 @@ export class IO {
 }
 
 export class Task {
-  constructor(private f: any) {}
-  static of(f) {
-    return new Task(f);
+  public fork;
+  constructor(public computation: any) {
+    this.fork = computation;
+  }
+
+  static of(b) {
+    return new Task((_, resolve) => {
+      return resolve(b);
+    });
   }
 
   map(f) {
-    return;
-  }
-  fork(f, g) {
-    this.f(f, g);
+    // return Task.of(() => this.f());
   }
 }

@@ -34,14 +34,15 @@ test("IO", () => {
 });
 
 describe("Task", () => {
-  const myTask = Task.of((res, rej) => {
-    Promise.resolve(4).then(res);
-  });
+  test("should ", (done) => {
+    const task = Task.of("bar");
 
-  myTask.fork(
-    (res) => {
-      expect(res).toEqual(4);
-    },
-    () => {}
-  );
+    task.fork(
+      () => {},
+      (res) => {
+        expect(res).toEqual("foo");
+        done();
+      }
+    );
+  });
 });
