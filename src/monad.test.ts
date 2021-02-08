@@ -1,5 +1,5 @@
 import fs from "fs";
-import { tryCatch, IO } from "./monad";
+import { tryCatch, IO, Task } from "./monad";
 
 test("Either using chain", () => {
   const getPort = (path) =>
@@ -31,4 +31,17 @@ test("IO", () => {
 
   const res = nextCharForNumberString(" 64").fold((x) => x);
   expect(res).toEqual("a");
+});
+
+describe("Task", () => {
+  const myTask = Task.of((res, rej) => {
+    Promise.resolve(4).then(res);
+  });
+
+  myTask.fork(
+    (res) => {
+      expect(res).toEqual(4);
+    },
+    () => {}
+  );
 });
