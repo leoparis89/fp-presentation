@@ -21,18 +21,26 @@ export class Right {
   }
 }
 
-export const Left = (x) => ({
-  chain: (f) => Left(x),
-  map: (f) => Left(x),
-  fold: (f, g) => f(x),
-});
+export class Left {
+  constructor(private x: any) {}
+
+  chain(f) {
+    return this;
+  }
+  map(f) {
+    return this;
+  }
+  fold(f, g) {
+    return f(this.x);
+  }
+}
 
 //tryCatch:: a -> b -> Either b
 export const tryCatch = (f) => {
   try {
     return Right.of(f());
   } catch (e) {
-    return Left(e);
+    return new Left(e);
   }
 };
 
