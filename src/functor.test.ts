@@ -1,5 +1,5 @@
-import { Box, Right, Left, tryCatch } from "./functor";
 import fs from "fs";
+import { Box, tryCatch } from "./functor";
 
 describe("Functors", () => {
   describe("Identity functor", () => {
