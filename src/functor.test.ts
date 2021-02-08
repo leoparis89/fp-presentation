@@ -10,8 +10,8 @@ describe("Functors", () => {
       const identity = (x) => x;
 
       test("composition law", () => {
-        const compaLawResult1 = Box(3).map(f).map(g);
-        const compaLawResult2 = Box(3).map(h);
+        const compaLawResult1 = Box.of(3).map(f).map(g);
+        const compaLawResult2 = Box.of(3).map(h);
 
         expect(JSON.stringify(compaLawResult1)).toEqual(
           JSON.stringify(compaLawResult2)
@@ -19,8 +19,8 @@ describe("Functors", () => {
       });
 
       test("identity law", () => {
-        const idResult1 = identity(Box(3));
-        const idResult2 = Box(3).map(identity);
+        const idResult1 = identity(Box.of(3));
+        const idResult2 = Box.of(3).map(identity);
 
         expect(JSON.stringify(idResult1)).toEqual(JSON.stringify(idResult2));
       });
@@ -34,10 +34,12 @@ describe("Functors", () => {
         return String.fromCharCode(nextNumber);
       };
 
+      const trim = (s) => s.trim();
+
       const nextCharForNumberString = (str) =>
-        Box(str)
-          .map((s) => s.trim())
-          .map((s) => Number(s))
+        Box.of(str)
+          .map(trim)
+          .map(Number)
           .map((i) => i + 1)
           .map((i) => String.fromCharCode(i))
           .fold((c) => c.toLowerCase());
@@ -62,10 +64,12 @@ describe("Functors", () => {
       expect(getPort("src/missing.json")).toEqual(3000);
     });
 
+    const parse = (c) => JSON.parse(c);
+
     test("example with map", () => {
       const getPort = (path) =>
         tryCatch(() => fs.readFileSync(path))
-          .map((c) => JSON.parse(c))
+          .map(parse)
           .fold(
             (e) => 3000,
             (c) => c.port
