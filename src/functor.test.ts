@@ -65,6 +65,7 @@ describe("Functors", () => {
           );
 
       expect(getPort("src/config.json")).toEqual(8000);
+      expect(getPort("src/missing.json")).toEqual(3000);
     });
   });
 });

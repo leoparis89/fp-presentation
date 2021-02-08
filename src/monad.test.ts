@@ -1,7 +1,7 @@
 import fs from "fs";
 import { tryCatch, IO } from "./monad";
 
-test("one (map)", () => {
+test("Either using chain", () => {
   const getPort = (path) =>
     tryCatch(() => fs.readFileSync(path))
       .chain((c) => tryCatch(() => JSON.parse(c)))
@@ -12,7 +12,8 @@ test("one (map)", () => {
         }
       );
 
-  getPort("src/config.json");
+  expect(getPort("src/config.json")).toEqual(8000);
+  expect(getPort("src/missing.json")).toEqual(3000);
 });
 
 test("IO", () => {
