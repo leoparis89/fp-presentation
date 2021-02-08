@@ -8,7 +8,7 @@ test("Either using chain", () => {
       .fold(
         (e) => 3000,
         (c) => {
-          expect(c.port).toEqual(8000);
+          return c.port;
         }
       );
 
