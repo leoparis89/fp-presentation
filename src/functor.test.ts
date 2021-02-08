@@ -55,7 +55,7 @@ describe("Functors", () => {
       expect(getPort("src/missing.json")).toEqual(3000);
     });
 
-    test("one map", () => {
+    test("example with map", () => {
       const getPort = (path) =>
         tryCatch(() => fs.readFileSync(path))
           .map((c) => JSON.parse(c))
