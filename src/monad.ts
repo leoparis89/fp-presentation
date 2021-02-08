@@ -48,3 +48,11 @@ export class IO {
     return g(this.f());
   }
 }
+
+export class Task {
+  constructor(private f: any) {}
+
+  fork(f, g) {
+    this.f(f, g);
+  }
+}
