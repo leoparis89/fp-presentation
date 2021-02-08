@@ -3,7 +3,7 @@ import { Box, tryCatch } from "./functor";
 
 describe("Functors", () => {
   describe("Identity functor", () => {
-    describe("verify functor laws ", () => {
+    describe("verify functor laws", () => {
       const f = (x: number) => x * 2;
       const g = (x: number): Boolean => x % 2 === 0;
       const h = (x) => g(f(x));
@@ -18,7 +18,7 @@ describe("Functors", () => {
         );
       });
 
-      test("identity law result", () => {
+      test("identity lawt", () => {
         const idResult1 = identity(Box(3));
         const idResult2 = Box(3).map(identity);
 
