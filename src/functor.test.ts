@@ -18,7 +18,7 @@ describe("Functors", () => {
         );
       });
 
-      test("identity lawt", () => {
+      test("identity law", () => {
         const idResult1 = identity(Box(3));
         const idResult2 = Box(3).map(identity);
 
