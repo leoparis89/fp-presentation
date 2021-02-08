@@ -51,8 +51,8 @@ describe("Functors", () => {
           return 3000;
         }
       };
-      const result = getPort("src/config.json");
-      expect(result).toEqual(8000);
+      expect(getPort("src/config.json")).toEqual(8000);
+      expect(getPort("src/missing.json")).toEqual(3000);
     });
 
     test("one map", () => {
