@@ -1,9 +1,3 @@
-// export const Right = (x) => ({
-//   chain: (f) => f(x),
-//   map: (f) => Right(f(x)),
-//   fold: (f, g) => g(x),
-// });
-
 export class Right {
   constructor(private x: any) {}
 
