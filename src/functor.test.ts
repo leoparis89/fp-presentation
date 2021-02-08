@@ -27,6 +27,13 @@ describe("Functors", () => {
     });
 
     test("use case with no statefull variables", () => {
+      const nextCharForNumberStringImperative = (str) => {
+        const trimmed = str.trim();
+        const number = parseInt(trimmed);
+        const nextNumber = number + 1;
+        return String.fromCharCode(nextNumber);
+      };
+
       const nextCharForNumberString = (str) =>
         Box(str)
           .map((s) => s.trim())
