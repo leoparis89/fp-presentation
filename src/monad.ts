@@ -49,11 +49,9 @@ export class IO {
   }
 }
 
+type Calculation = (reject: Function, resolve: Function) => any;
 export class Task {
-  public fork;
-  constructor(public computation: any) {
-    this.fork = computation;
-  }
+  constructor(public fork: Calculation) {}
 
   static of(b) {
     return new Task((_, resolve) => {
@@ -62,7 +60,6 @@ export class Task {
   }
 
   map(f) {
-    return this;
-    // return Task.of(() => this.f());
+    return new Task(this.fork);
   }
 }

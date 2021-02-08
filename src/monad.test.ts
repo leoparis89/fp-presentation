@@ -37,7 +37,9 @@ describe("Task", () => {
   test("should", (done) => {
     // const task = Task.of("bar");
     const task = new Task((reject, resolve) => {
-      Promise.resolve("foo").then(resolve);
+      Promise.resolve("foo").then((val) => {
+        resolve(val);
+      });
     });
 
     task
