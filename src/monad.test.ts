@@ -18,7 +18,7 @@ test("Either using chain", () => {
 
 test("IO", () => {
   const nextCharForNumberString = (str) =>
-    IO(() => str)
+    new IO(() => str)
       .map((s) => s.trim())
       .map((s) => Number(s))
       .map((v) => {
@@ -31,16 +31,4 @@ test("IO", () => {
 
   const res = nextCharForNumberString(" 64").fold((x) => x);
   expect(res).toEqual("a");
-
-  const getDate = () =>
-    IO(() => new Date()).map(
-      (date: Date) => date + " c'est la date d'aujoudhui"
-    );
-
-  const date = getDate();
-  const date2 = getDate();
-
-  // .fold((i) => i);
-
-  // expect(result).toEqual("bar");
 });

@@ -38,7 +38,13 @@ export const tryCatch = (f) => {
   }
 };
 
-export const IO = (f) => ({
-  map: (g) => IO(() => g(f())),
-  fold: (g) => g(f()),
-});
+export class IO {
+  constructor(private f: any) {}
+
+  map(g) {
+    return new IO(() => g(this.f()));
+  }
+  fold(g) {
+    return g(this.f());
+  }
+}
