@@ -47,7 +47,7 @@ describe("Task", () => {
       .fork(
         () => {},
         (res) => {
-          expect(res).toEqual("foo");
+          expect(res).toEqual("foobar");
           done();
         }
       );

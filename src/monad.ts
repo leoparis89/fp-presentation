@@ -60,6 +60,8 @@ export class Task {
   }
 
   map(f) {
-    return new Task(this.fork);
+    return new Task((reject, resolve) =>
+      this.fork(reject, (v) => resolve(f(v)))
+    );
   }
 }
