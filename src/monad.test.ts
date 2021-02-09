@@ -1,6 +1,6 @@
 import fs from "fs";
 import { Box } from "./functor";
-import { tryCatch, IO, Task, liftA2, Eiter, Right } from "./monad";
+import { tryCatch, IO, Task, liftA2, Eiter, Right, List } from "./monad";
 
 const add = (x) => (y) => x + y;
 test("Either using chain", () => {
@@ -63,6 +63,12 @@ describe("Identity functor", () => {
 
   it("should apply", () => {
     expect(Box.of(add).ap(Box.of(3)).ap(Box.of(4))).toEqual(Box.of(7));
+  });
+});
+
+describe("List Monad", () => {
+  it("should map", () => {
+    expect(List.of([1, 2, 3]).map((i) => i + 1)).toEqual(List.of([2, 3, 4]));
   });
 });
 
