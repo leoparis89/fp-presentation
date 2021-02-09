@@ -1,6 +1,6 @@
 import fs from "fs";
 import { Box } from "./functor";
-import { tryCatch, IO, Task } from "./monad";
+import { tryCatch, IO, Task, liftA2 } from "./monad";
 
 test("Either using chain", () => {
   const getPort = (path) =>
@@ -56,12 +56,16 @@ describe("Task", () => {
 });
 
 describe("Identity functor", () => {
+  const add = (x) => (y) => x + y;
   it("should chain", () => {
     expect(Box.of(3).chain((x) => Box.of(x + 3))).toEqual(Box.of(6));
   });
 
   it("should apply", () => {
-    const add = (x) => (y) => x + y;
-    expect(Box.of(add).app(3).app(4)).toEqual(Box.of(7));
+    expect(Box.of(add).ap(Box.of(3)).ap(Box.of(4))).toEqual(Box.of(7));
+  });
+
+  test("liftA2", () => {
+    expect(liftA2(add, Box.of(2), Box.of(3))).toEqual(Box.of(5));
   });
 });

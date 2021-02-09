@@ -72,8 +72,8 @@ export class Task {
   }
 }
 
-const double = (x) => x * 2;
-const divide = (x) => x / 3;
-const toString = (x) => String(x);
+// F(x).map(f) = F(f).ap(F(x))
+// export const liftA2 = (f, fx, fx) => F(f).ap(fx).ap(fy)
+// export const liftA2 = (f, fx, fx) => F(f).ap(fx).ap(fy)
 
-const total = (x) => toString(divide(double(x)));
+export const liftA2 = (f, fx, fy) => fx.map(f).ap(fy);

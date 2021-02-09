@@ -17,8 +17,8 @@ export class Box {
     return f(this.x);
   }
 
-  app(x) {
-    return Box.of(this.x(x));
+  ap(fx) {
+    return fx.map(this.x);
   }
 }
 
