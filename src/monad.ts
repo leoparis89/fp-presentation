@@ -124,7 +124,12 @@ export class List {
     return List.of(this.x.map(f));
   }
 
+  flatten() {
+    return this.x.flat();
+  }
+
   ap(fx) {
-    return fx.map((el) => this.x.map((f) => f(el))).flat();
+    // return fx.map((el) => this.x.map((f) => f(el))).flatten();
+    // return fx.map((e) => e);
   }
 }
