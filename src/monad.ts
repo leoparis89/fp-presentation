@@ -1,3 +1,27 @@
+export class Box {
+  constructor(private x: any) {}
+
+  static of(x) {
+    return new Box(x);
+  }
+
+  map(f) {
+    return Box.of(f(this.x));
+  }
+
+  chain(f) {
+    return f(this.x);
+  }
+
+  fold(f: Function) {
+    return f(this.x);
+  }
+
+  ap(fx) {
+    return fx.map(this.x);
+  }
+}
+
 export class Right {
   constructor(private x: any) {}
 
