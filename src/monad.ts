@@ -53,6 +53,12 @@ export class Left {
   }
 }
 
+export class Eiter {
+  static of(x) {
+    return new Right(x);
+  }
+  constructor(private x: any) {}
+}
 //tryCatch:: a -> b -> Either b
 export const tryCatch = (f) => {
   try {

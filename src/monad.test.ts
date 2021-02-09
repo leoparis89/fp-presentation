@@ -2,6 +2,7 @@ import fs from "fs";
 import { Box } from "./functor";
 import { tryCatch, IO, Task, liftA2 } from "./monad";
 
+const add = (x) => (y) => x + y;
 test("Either using chain", () => {
   const getPort = (path) =>
     tryCatch(() => fs.readFileSync(path))
@@ -56,7 +57,6 @@ describe("Task", () => {
 });
 
 describe("Identity functor", () => {
-  const add = (x) => (y) => x + y;
   it("should chain", () => {
     expect(Box.of(3).chain((x) => Box.of(x + 3))).toEqual(Box.of(6));
   });
@@ -64,8 +64,13 @@ describe("Identity functor", () => {
   it("should apply", () => {
     expect(Box.of(add).ap(Box.of(3)).ap(Box.of(4))).toEqual(Box.of(7));
   });
+});
 
+describe("Applicatives", () => {
   test("liftA2", () => {
     expect(liftA2(add, Box.of(2), Box.of(3))).toEqual(Box.of(5));
+
+    const getScreenSize = (screen) => (head) => (foot) =>
+      screen - (head.height + foot.height);
   });
 });
