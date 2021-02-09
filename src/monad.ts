@@ -59,9 +59,21 @@ export class Task {
     });
   }
 
+  static rejected(b) {
+    return new Task((reject, _) => {
+      return reject(b);
+    });
+  }
+
   map(f) {
     return new Task((reject, resolve) =>
       this.fork(reject, (v) => resolve(f(v)))
     );
   }
 }
+
+const double = (x) => x * 2;
+const divide = (x) => x / 3;
+const toString = (x) => String(x);
+
+const total = (x) => toString(divide(double(x)));

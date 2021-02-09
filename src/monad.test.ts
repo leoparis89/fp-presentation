@@ -1,4 +1,5 @@
 import fs from "fs";
+import { Box } from "./functor";
 import { tryCatch, IO, Task } from "./monad";
 
 test("Either using chain", () => {
@@ -51,5 +52,16 @@ describe("Task", () => {
           done();
         }
       );
+  });
+});
+
+describe("Identity functor", () => {
+  it("should chain", () => {
+    expect(Box.of(3).chain((x) => Box.of(x + 3))).toEqual(Box.of(6));
+  });
+
+  it("should apply", () => {
+    const add = (x) => (y) => x + y;
+    expect(Box.of(add).app(3).app(4)).toEqual(Box.of(7));
   });
 });

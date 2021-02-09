@@ -9,8 +9,16 @@ export class Box {
     return Box.of(f(this.x));
   }
 
+  chain(f) {
+    return f(this.x);
+  }
+
   fold(f: Function) {
     return f(this.x);
+  }
+
+  app(x) {
+    return Box.of(this.x(x));
   }
 }
 
