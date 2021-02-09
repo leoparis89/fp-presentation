@@ -133,7 +133,9 @@ export class List {
   }
 
   ap(fx) {
-    return fx.map((el) => this.x.map((f) => f(el))).flatten();
+    return this.map((f) => fx.map(f)).flatten();
+    // return fx.chain((el) => this.x.map((f) => f(el)));
+
     // return fx.map((e) => e);
   }
 }
