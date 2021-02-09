@@ -70,6 +70,9 @@ describe("List Monad", () => {
   it("should map", () => {
     expect(List.of([1, 2, 3]).map((i) => i + 1)).toEqual(List.of([2, 3, 4]));
   });
+  it("should apply", () => {
+    expect(List.of((x) => x + 1).ap([1, 2, 3])).toEqual("foo");
+  });
 });
 
 describe("Applicatives", () => {
