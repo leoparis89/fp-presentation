@@ -124,8 +124,12 @@ export class List {
     return List.of(this.x.map(f));
   }
 
+  chain(f) {
+    return List.of(this.x.map(f)).flatten();
+  }
+
   flatten() {
-    return this.x.flat();
+    return List.of(this.x.flat());
   }
 
   ap(fx) {
