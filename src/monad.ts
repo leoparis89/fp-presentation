@@ -117,12 +117,16 @@ export class Task {
 export const liftA2 = (f, fx, fy) => fx.map(f).ap(fy);
 
 export class List {
-  static of(xs) {
-    return new List(xs);
+  static of(x) {
+    return new List(x);
   }
-  constructor(private xs: any) {}
+  constructor(private x: any) {}
 
   map(f) {
-    return List.of(this.xs.map(f));
+    return List.of(this.x.map(f));
+  }
+
+  ap(fx) {
+    return fx.map(this.x);
   }
 }
