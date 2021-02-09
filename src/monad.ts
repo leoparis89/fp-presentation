@@ -133,7 +133,7 @@ export class List {
   }
 
   ap(fx) {
-    // return fx.map((el) => this.x.map((f) => f(el))).flatten();
+    return fx.map((el) => this.x.map((f) => f(el))).flatten();
     // return fx.map((e) => e);
   }
 }
