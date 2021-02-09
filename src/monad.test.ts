@@ -1,6 +1,6 @@
 import fs from "fs";
 import { Box } from "./functor";
-import { tryCatch, IO, Task, liftA2 } from "./monad";
+import { tryCatch, IO, Task, liftA2, Eiter, Right } from "./monad";
 
 const add = (x) => (y) => x + y;
 test("Either using chain", () => {
@@ -72,5 +72,11 @@ describe("Applicatives", () => {
 
     const getScreenSize = (screen) => (head) => (foot) =>
       screen - (head.height + foot.height);
+
+    const $ = (element) => Eiter.of({ element, height: 10 });
+
+    expect(liftA2(getScreenSize(300), $("head"), $("foot"))).toEqual(
+      Right.of(280)
+    );
   });
 });

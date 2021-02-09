@@ -34,6 +34,11 @@ export class Right {
   map(f) {
     return Right.of(f(this.x));
   }
+
+  ap(fx) {
+    return fx.map(this.x);
+  }
+
   fold(f, g) {
     return g(this.x);
   }
@@ -46,6 +51,9 @@ export class Left {
     return this;
   }
   map(f) {
+    return this;
+  }
+  ap(fx) {
     return this;
   }
   fold(f, g) {
