@@ -70,9 +70,19 @@ describe("List Monad", () => {
   it("should map", () => {
     expect(List.of([1, 2, 3]).map((i) => i + 1)).toEqual(List.of([2, 3, 4]));
   });
+
   it("should apply", () => {
     expect(List.of((x) => x + 1).ap([1, 2, 3])).toEqual("foo");
   });
+
+  // it("should apply2", () => {
+  //   expect(
+  //     List.of((x) => (y) => `${x}-`)
+  //       .ap(List.of(["thirt", "sweater"]))
+  //       .ap(List.of(["small", "medium"]))
+  //     // .ap("small")
+  //   ).toEqual("foo");
+  // });
 });
 
 describe("Applicatives", () => {

@@ -109,16 +109,14 @@ export class Task {
     );
   }
 }
-
 // F(x).map(f) = F(f).ap(F(x))
 // export const liftA2 = (f, fx, fx) => F(f).ap(fx).ap(fy)
 // export const liftA2 = (f, fx, fx) => F(f).ap(fx).ap(fy)
 
 export const liftA2 = (f, fx, fy) => fx.map(f).ap(fy);
-
 export class List {
   static of(x) {
-    return new List(x);
+    return new List(Array.isArray(x) ? x : [x]);
   }
   constructor(private x: any) {}
 
@@ -127,6 +125,6 @@ export class List {
   }
 
   ap(fx) {
-    return fx.map(this.x);
+    return fx.map((el) => this.x.map((f) => f(el))).flat();
   }
 }
